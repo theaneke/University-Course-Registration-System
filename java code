@@ -1,0 +1,112 @@
+import java.util.*;
+
+public class RegSystem {
+    static Scanner sc = new Scanner(System.in);
+    static String[] courses = {
+        "CSC101", "CSC102", "MTH101", "STA101", "GST101", "PHY101"
+    };
+    static ArrayList<Student> students = new ArrayList<>();
+
+    static class Student {
+        String name, matric;
+        ArrayList<String> reg = new ArrayList<>();
+
+        Student(String n, String m) {
+            name = n;
+            matric = m;
+        }
+    }
+
+    static Student find(String m) {
+        for (Student s : students)
+            if (s.matric.equalsIgnoreCase(m)) return s;
+        return null;
+    }
+
+    static void registerStudent() {
+        System.out.print("Name: ");
+        String n = sc.nextLine();
+        System.out.print("Matric No: ");
+        String m = sc.nextLine();
+
+        if (find(m) != null) {
+            System.out.println("Student already exists.");
+            return;
+        }
+
+        students.add(new Student(n, m));
+        System.out.println("Student registered.");
+    }
+
+    static void courses() {
+        for (int i = 0; i < courses.length; i++)
+            System.out.println((i + 1) + ". " + courses[i]);
+    }
+
+    static void registerCourse() {
+        System.out.print("Matric No: ");
+        Student s = find(sc.nextLine());
+
+        if (s == null) {
+            System.out.println("Student not found.");
+            return;
+        }
+
+        courses();
+        System.out.print("Course: ");
+        int n = sc.nextInt();
+        sc.nextLine();
+
+        if (n < 1 || n > courses.length) {
+            System.out.println("Invalid course.");
+            return;
+        }
+
+        if (s.reg.contains(courses[n - 1]))
+            System.out.println("Already registered.");
+        else {
+            s.reg.add(courses[n - 1]);
+            System.out.println("Course registered.");
+        }
+    }
+
+    static void view(String m) {
+        Student s = find(m);
+
+        if (s == null) {
+            System.out.println("Student not found.");
+            return;
+        }
+
+        System.out.println("\n" + s.name + " - " + s.matric);
+        for (String c : s.reg) System.out.println(c);
+        System.out.println("Total: " + s.reg.size());
+    }
+
+    public static void main(String[] args) {
+        int c;
+
+        do {
+            System.out.println(
+                "\n1.Register Student\n2.Available Courses\n3.Register Course" +
+                "\n4.View Registration\n5.Search Student\n6.Course Count\n7.Exit"
+            );
+
+            System.out.print("Choice: ");
+            c = sc.nextInt();
+            sc.nextLine();
+
+            switch (c) {
+                case 1 -> registerStudent();
+                case 2 -> courses();
+                case 3 -> registerCourse();
+                case 4, 5, 6 -> {
+                    System.out.print("Matric No: ");
+                    view(sc.nextLine());
+                }
+                case 7 -> System.out.println("Goodbye.");
+                default -> System.out.println("Invalid choice.");
+            }
+        } while (c != 7);
+    }
+}
