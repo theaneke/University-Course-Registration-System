@@ -3,7 +3,7 @@ import java.util.*;
 public class RegSystem {
     static Scanner sc = new Scanner(System.in);
     static String[] courses = {
-        "COS101", "COS222", "COS264", "MTH101", "MTH241", "STA101", "GSP101", "GSP201", "PHY101"
+        "COS101", "COS242", "COS264", "MTH112", "MTH241", "STA101", "GSP101", "GSP206", "PHY115"
     };
     static ArrayList<Student> students = new ArrayList<>();
 
