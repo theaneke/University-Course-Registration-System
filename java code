@@ -1,9 +1,11 @@
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class RegSystem {
     static Scanner sc = new Scanner(System.in);
     static String[] courses = {
-        "COS101", "COS242", "COS264", "MTH112", "MTH241", "STA101", "GSP101", "GSP206", "PHY115"
+        "COS101", "COS242", "COS264", "MTH112", "MTH241",
+        "STA101", "GSP101", "GSP206", "PHY115"
     };
     static ArrayList<Student> students = new ArrayList<>();
 
